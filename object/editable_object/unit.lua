@@ -973,19 +973,43 @@ function M:set_blood_bar_text(node_name, text, role, font)
     GameAPI.set_billboard_text(self.handle, node_name, text, role and role.handle or nil, font)
 end
 
+---设置血条进度[弃用]
+---@param node_name string # 血条命名
+---@param progress number # 进度
+---@param role? Player 可见玩家
+---@param transition_time? number # 过渡时间
+---@deprecated
+function M:set_billboard_progress(node_name, progress, role, transition_time)
+    GameAPI.set_billboard_progress(self.handle, node_name, progress, role and role.handle or nil, transition_time or 0)
+end
+
 ---设置血条进度
 ---@param node_name string # 血条命名
 ---@param progress number # 进度
 ---@param role? Player 可见玩家
 ---@param transition_time? number # 过渡时间
-function M:set_billboard_progress(node_name, progress, role, transition_time)
+function M:set_blood_bar_progress(node_name, progress, role, transition_time)
     GameAPI.set_billboard_progress(self.handle, node_name, progress, role and role.handle or nil, transition_time or 0)
+end
+
+---设置血条显示方式[弃用]
+---@param bar_show_type integer 血条显示方式
+---@deprecated
+function M:set_health_bar_display(bar_show_type)
+    self.handle:api_set_blood_bar_show_type(bar_show_type)
 end
 
 ---设置血条显示方式
 ---@param bar_show_type integer 血条显示方式
-function M:set_health_bar_display(bar_show_type)
+function M:set_blood_bar_display(bar_show_type)
     self.handle:api_set_blood_bar_show_type(bar_show_type)
+end
+
+---设置血条整体可见性
+---@param visible boolean # 可见性
+---@param role? Player # 玩家
+function M:set_blood_bar_visible(visible, role)
+    GameAPI.set_billboard_overall_visibility(self.handle, visible, role and role.handle or nil)
 end
 
 --***************敌我合并一条
