@@ -27,7 +27,7 @@ function M.get_by_handle(py_unit_group)
 end
 
 y3.py_converter.register_py_to_lua('py.UnitGroup', M.get_by_handle)
-y3.py_converter.register_lua_to_py('py.UnitGroup', function (lua_value)
+y3.py_converter.register_lua_to_py('py.UnitGroup', function(lua_value)
     return lua_value.handle
 end)
 
@@ -40,9 +40,9 @@ end
 --将单位组转换为Lua的单位数组
 ---@return Unit[]
 function M:pick()
-    local lua_table ={}
+    local lua_table = {}
     for _, iter_unit in pairs(self.handle) do
-        table.insert(lua_table,y3.unit.get_by_id(iter_unit))
+        table.insert(lua_table, y3.unit.get_by_id(iter_unit))
     end
     return lua_table
 end
@@ -63,7 +63,7 @@ end
 function M:pairs()
     local i = -1
     local len = #self.handle
-    return function ()
+    return function()
         i = i + 1
         if i >= len then
             return
@@ -82,7 +82,7 @@ end
 --添加单位
 ---@param unit Unit 单位
 function M:add_unit(unit)
-    GameAPI.add_unit_to_group(unit.handle,self.handle)
+    GameAPI.add_unit_to_group(unit.handle, self.handle)
 end
 
 --移除单位
@@ -106,7 +106,7 @@ end
 ---@param count integer
 ---@return UnitGroup unit_group  随机整数个单位
 function M:pick_random_n(count)
-    local py_unit_group =GameAPI.get_random_n_unit_in_group(self.handle, count)
+    local py_unit_group = GameAPI.get_random_n_unit_in_group(self.handle, count)
     return M.get_by_handle(py_unit_group)
 end
 
@@ -128,7 +128,7 @@ end
 ---@param unit_key py.UnitKey
 ---@return integer num_of_unit 单位类型的数量
 function M:count_by_key(unit_key)
-    return GameAPI.get_num_of_unit_key_in_group(self.handle,unit_key)
+    return GameAPI.get_num_of_unit_key_in_group(self.handle, unit_key)
 end
 
 --获取单位组内第一个单位
@@ -159,6 +159,13 @@ function M:get_last()
         return nil
     end
     return y3.unit.get_by_handle(py_unit)
+end
+
+--判断单位是否在单位组
+---@param unit Unit 单位
+---@return boolean 是否在单位组
+function M:has_unit(unit)
+    return GameAPI.judge_unit_in_group(unit.handle, self.handle)
 end
 
 return M
