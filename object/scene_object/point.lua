@@ -73,31 +73,31 @@ end)
 ---点的x坐标
 ---@return number
 function M:get_x()
-    if not self.x then
+    if not self.__x then
         ---@diagnostic disable-next-line: undefined-field
-        self.x = self.handle:get_x()
+        self.__x = self.handle:get_x()
     end
-    return self.x
+    return self.__x
 end
 
 ---点的y坐标
 ---@return number
 function M:get_y()
-    if not self.y then
+    if not self.__y then
         ---@diagnostic disable-next-line: undefined-field
-        self.y = self.handle:get_y()
+        self.__y = self.handle:get_y()
     end
-    return self.y
+    return self.__y
 end
 
 ---点的z坐标
 ---@return number
 function M:get_z()
-    if not self.z then
+    if not self.__z then
         ---@diagnostic disable-next-line: undefined-field
-        self.z = self.handle:get_z()
+        self.__z = self.handle:get_z()
     end
-    return self.z
+    return self.__z
 end
 
 ---@return Point
@@ -128,9 +128,9 @@ function M.create(x, y, z)
     -- TODO 见问题2
     ---@diagnostic disable-next-line: param-type-mismatch
     local p = M.get_by_handle(py_point)
-    p.x = x
-    p.y = y
-    p.z = z or 0
+    p.__x = x
+    p.__y = y
+    p.__z = z or 0
     return p
 end
 

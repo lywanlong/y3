@@ -128,7 +128,7 @@ function M:get_point()
     -- TODO 见问题2
     ---@diagnostic disable-next-line: param-type-mismatch
     local point = y3.point.get_by_handle(py_point)
-    point.z = self:get_height()
+    point.__z = self:get_height()
     return point
 end
 
