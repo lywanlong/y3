@@ -651,7 +651,7 @@ function M:get_max_cd()
     return self:get_float_attr("cold_down_time")
 end
 
----进入技能准备施法状态
+---打开技能施法器(选择后施法)
 ---@param player Player 玩家
 function M:pre_cast(player)
     GameAPI.start_skill_pointer(player.handle, self.handle)
