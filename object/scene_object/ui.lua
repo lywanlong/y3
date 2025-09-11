@@ -1105,6 +1105,16 @@ function M:get_child(name)
     return y3.ui.get_by_handle(self.player, py_ui)
 end
 
+---@param name string
+---@param fun fun(UI:UI)
+function M:safe_get_child(name,fun)
+    local v = self:get_child(name)
+    if v then
+        fun(v)
+        return
+    end
+end
+
 ---@package
 function M:remove_get_child_cache(name)
     if self._get_child_py_ui_cache then
